@@ -1,0 +1,5 @@
+username	文字列	30	10	Y
+email	文字列	60	5	Y
+age	数値	3	0	N
+salary	数値	6	2	N
+married	論理型	-	-	N

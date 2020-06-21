@@ -1,0 +1,25 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+    username:
+        type: string
+        maxLength: 30
+        minLength: 10
+        required: true
+    email:
+        type: string
+        maxLength: 60
+        minLength: 5
+        required: true
+    age:
+        type: number
+        maximum: 999
+        required: false
+    salary:
+        type: number
+        maximum: 999999.99
+        multipleOf: 0.01
+        required: false
+    married:
+        type: boolean
+        required: false
