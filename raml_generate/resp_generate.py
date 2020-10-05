@@ -17,14 +17,15 @@ PROP_PRE = '    '
 
 
 def sfname_to_jsonname(sfname: str):
-    return sfname.replace('__c', '')
+    return sfname.strip().replace('__c', '')
 
 
 def get_field_raml(fname, ftype, example):
     new_fn = sfname_to_jsonname(fname)
     result = FNAME_PRE + new_fn + ':\n'
     result += PROP_PRE + 'type: ' + TYPE_MAPPING[ftype] + '\n'
-    result += PROP_PRE + 'description: ' + re.sub('([A-Z])', ' \\1', new_fn).strip() + '\n'
+    result += PROP_PRE + 'description: ' + \
+        re.sub('([A-Z])', ' \\1', new_fn).strip() + '\n'
     result += PROP_PRE + 'example: ' + example + '\n'
     return result
 
