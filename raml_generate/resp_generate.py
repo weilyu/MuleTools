@@ -1,6 +1,8 @@
 """
 author: weilyu
 """
+import re
+
 TYPE_MAPPING = {
     '文字列': 'string',
     '数値': 'number',
@@ -18,10 +20,11 @@ def sfname_to_jsonname(sfname: str):
     return sfname.replace('__c', '')
 
 
-def get_field_raml(fname, description, ftype, example):
-    result = FNAME_PRE + sfname_to_jsonname(fname) + ':\n'
+def get_field_raml(fname, ftype, example):
+    new_fn = sfname_to_jsonname(fname)
+    result = FNAME_PRE + new_fn + ':\n'
     result += PROP_PRE + 'type: ' + TYPE_MAPPING[ftype] + '\n'
-    result += PROP_PRE + 'description: ' + description + '\n'
+    result += PROP_PRE + 'description: ' + re.sub('([A-Z])', ' \\1', new_fn).strip() + '\n'
     result += PROP_PRE + 'example: ' + example + '\n'
     return result
 
@@ -33,7 +36,7 @@ for line in input_file:
     if len(props) < 3:
         print('Passed line:', line)
         continue
-    raml += get_field_raml(props[0], props[1], props[2], props[3])
+    raml += get_field_raml(props[0], props[1], props[2])
 output_file = open('output.txt', encoding='utf8', mode='w')
 output_file.write(raml)
 
