@@ -13,11 +13,11 @@ TYPE_MAPPING = {
 FNAME_PRE = '  '
 PROP_PRE = '    '
 
+
 def sfname_to_jsonname(sfname: str):
     return sfname.replace('__c', '')
 
 
-# 数値の場合：maxlen - 整数桁数、minlen - 小数点以下の桁数
 def get_field_raml(fname, description, ftype, example):
     result = FNAME_PRE + sfname_to_jsonname(fname) + ':\n'
     result += PROP_PRE + 'type: ' + TYPE_MAPPING[ftype] + '\n'
